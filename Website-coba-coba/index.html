@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kenali Stresmu - Refleksi Siswa</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        
+        <!-- HALAMAN BERANDA -->
+        <section id="home-page" class="page active">
+            <div class="card text-center">
+                <div class="hero-icon">🌱</div>
+                <h1>Kenali Stresmu</h1>
+                <h2>Yuk, kenali perasaanmu dan temukan cara sederhana untuk menjaga dirimu tetap tenang.</h2>
+                <p class="disclaimer">Tes ini bersifat refleksi pribadi. Jawablah sesuai dengan apa yang kamu rasakan dalam beberapa waktu terakhir.</p>
+                <button class="btn-primary" onclick="showPage('form-page')">Mulai Tes</button>
+            </div>
+        </section>
+
+        <!-- HALAMAN FORM DATA SISWA -->
+        <section id="form-page" class="page">
+            <div class="card">
+                <h2>Data Dirimu</h2>
+                <p class="subtitle-text">Isi data ini dulu ya. Tenang saja, datamu aman dan tidak akan disimpan.</p>
+                <div class="form-group">
+                    <label for="nama">Nama Panggilan (Opsional):</label>
+                    <input type="text" id="nama" placeholder="Contoh: Budi">
+                </div>
+                <div class="form-group">
+                    <label for="jenjang">Jenjang:</label>
+                    <select id="jenjang" onchange="updateKelasOptions()">
+                        <option value="">-- Pilih Jenjang --</option>
+                        <option value="SMP">SMP</option>
+                        <option value="SMA">SMA</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="kelas">Kelas:</label>
+                    <select id="kelas">
+                        <option value="">-- Pilih Kelas --</option>
+                        <!-- Opsi akan diisi oleh JavaScript -->
+                    </select>
+                </div>
+                <button class="btn-primary w-100" onclick="startTest()">Lanjut ke Pertanyaan</button>
+                <button class="btn-secondary w-100 mt-2" onclick="showPage('home-page')">Kembali</button>
+            </div>
+        </section>
+
+        <!-- HALAMAN PERTANYAAN -->
+        <section id="quiz-page" class="page">
+            <div class="card">
+                <div class="progress-container">
+                    <div class="progress-bar" id="progress-bar"></div>
+                </div>
+                <p class="progress-text" id="progress-text">Pertanyaan 1 dari 15</p>
+                
+                <h3 id="question-text" class="question-title">Pertanyaan akan muncul di sini</h3>
+                
+                <div class="options-container" id="options-container">
+                    <!-- Opsi jawaban akan di-generate oleh JS -->
+                </div>
+
+                <div class="nav-buttons">
+                    <button class="btn-secondary" id="btn-prev" onclick="prevQuestion()">Sebelumnya</button>
+                    <button class="btn-primary" id="btn-next" onclick="nextQuestion()">Berikutnya</button>
+                    <button class="btn-primary" id="btn-result" style="display: none;" onclick="showResult()">Lihat Hasil</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- HALAMAN HASIL -->
+        <section id="result-page" class="page">
+            <div class="card text-center" id="print-area">
+                <h2 class="result-title">HASIL REFLEKSI KAMU</h2>
+                <p>Nama: <strong id="result-name">-</strong> | Kelas: <strong id="result-class">-</strong></p>
+                
+                <div class="score-circle">
+                    <span id="score-number">0</span>
+                </div>
+                
+                <h3 id="stress-level" class="stress-level">Tingkat Stres</h3>
+                
+                <div class="explanation-box">
+                    <h4>Apa artinya?</h4>
+                    <p id="stress-explanation">Penjelasan akan muncul di sini.</p>
+                </div>
+
+                <div class="advice-box" id="advice-box">
+                    <h4>Saran untukmu:</h4>
+                    <ul id="advice-list" class="text-left">
+                        <!-- Saran akan di-generate oleh JS -->
+                    </ul>
+                </div>
+                
+                <p class="disclaimer-alert">⚠️ Catatan: Hasil ini bukan diagnosis medis atau psikologis, hanya digunakan sebagai refleksi awal mengenai kondisi yang kamu rasakan. Jawabanmu tidak dikirim ke server.</p>
+            </div>
+
+            <!-- FITUR REFLEKSI HARIAN -->
+            <div class="card mt-3 no-print">
+                <h3>Bagaimana perasaanmu hari ini?</h3>
+                <div class="emoji-container">
+                    <span class="emoji-btn" onclick="selectEmoji(this)">😀<br><small>Sangat Baik</small></span>
+                    <span class="emoji-btn" onclick="selectEmoji(this)">🙂<br><small>Baik</small></span>
+                    <span class="emoji-btn" onclick="selectEmoji(this)">😐<br><small>Biasa Saja</small></span>
+                    <span class="emoji-btn" onclick="selectEmoji(this)">😟<br><small>Kurang Baik</small></span>
+                    <span class="emoji-btn" onclick="selectEmoji(this)">😔<br><small>Tidak Baik</small></span>
+                </div>
+                <div class="form-group mt-2">
+                    <label>Apa yang paling membuatmu merasa seperti ini?</label>
+                    <textarea rows="3" placeholder="Ceritakan sedikit di sini... (opsional)"></textarea>
+                </div>
+            </div>
+
+            <div class="action-buttons no-print mt-3">
+                <button class="btn-primary" onclick="showTips()">Lihat Tips Mengurangi Stres</button>
+                <button class="btn-secondary" onclick="window.print()">Cetak Hasil</button>
+                <button class="btn-secondary" onclick="resetTest()">Ulangi Tes</button>
+            </div>
+        </section>
+
+        <!-- HALAMAN TIPS -->
+        <section id="tips-page" class="page">
+            <div class="card">
+                <h2>Tips Mengurangi Stres</h2>
+                <div class="tips-grid">
+                    <div class="tip-card">
+                        <div class="tip-icon">🧘</div>
+                        <h4>Tarik Napas</h4>
+                        <p>Lakukan beberapa tarikan napas perlahan untuk membantu menenangkan diri.</p>
+                    </div>
+                    <div class="tip-card">
+                        <div class="tip-icon">📚</div>
+                        <h4>Atur Waktu Belajar</h4>
+                        <p>Buat jadwal belajar sederhana dan berikan waktu istirahat yang cukup.</p>
+                    </div>
+                    <div class="tip-card">
+                        <div class="tip-icon">🎵</div>
+                        <h4>Aktivitas Disukai</h4>
+                        <p>Luangkan waktu untuk kegiatan positif yang membuatmu nyaman.</p>
+                    </div>
+                    <div class="tip-card">
+                        <div class="tip-icon">😴</div>
+                        <h4>Istirahat Cukup</h4>
+                        <p>Berikan tubuh dan pikiran waktu untuk beristirahat dari rutinitas.</p>
+                    </div>
+                    <div class="tip-card">
+                        <div class="tip-icon">💬</div>
+                        <h4>Bercerita</h4>
+                        <p>Berbicara dengan orang yang dipercaya membuat beban terasa lebih ringan.</p>
+                    </div>
+                    <div class="tip-card">
+                        <div class="tip-icon">🚶</div>
+                        <h4>Bergerak</h4>
+                        <p>Lakukan aktivitas fisik ringan seperti berjalan atau peregangan.</p>
+                    </div>
+                </div>
+                <button class="btn-primary w-100 mt-3" onclick="showPage('result-page')">Kembali ke Hasil</button>
+            </div>
+        </section>
+
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

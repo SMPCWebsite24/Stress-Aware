@@ -1,0 +1,210 @@
+/* Variabel Warna Tema (Menenangkan) */
+:root {
+    --bg-color: #f0f8ff; /* Alice Blue */
+    --card-bg: #ffffff;
+    --primary-color: #5b9bd5;
+    --primary-hover: #4a82b4;
+    --secondary-color: #e2e8f0;
+    --secondary-hover: #cbd5e1;
+    --text-main: #334155;
+    --text-muted: #64748b;
+    --border-radius: 16px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    line-height: 1.6;
+    padding: 20px;
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Pengaturan Halaman (SPA Concept) */
+.page {
+    display: none;
+    animation: fadeIn 0.4s ease-in-out;
+}
+
+.page.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Desain Card */
+.card {
+    background: var(--card-bg);
+    padding: 30px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.05);
+}
+
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.mt-2 { margin-top: 15px; }
+.mt-3 { margin-top: 25px; }
+.w-100 { width: 100%; }
+
+/* Tipografi */
+h1, h2, h3 { color: var(--primary-color); margin-bottom: 10px; }
+.hero-icon { font-size: 60px; margin-bottom: 10px; }
+.subtitle-text { color: var(--text-muted); margin-bottom: 20px; font-size: 14px; }
+.disclaimer { font-size: 13px; color: #888; margin: 20px 0; padding: 10px; background: #f8fafc; border-radius: 8px;}
+
+/* Form */
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+label { display: block; margin-bottom: 5px; font-weight: 600; }
+input, select, textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 15px;
+    transition: border 0.3s;
+}
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+/* Tombol */
+button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.btn-primary { background: var(--primary-color); color: white; }
+.btn-primary:hover { background: var(--primary-hover); }
+.btn-secondary { background: var(--secondary-color); color: var(--text-main); }
+.btn-secondary:hover { background: var(--secondary-hover); }
+.nav-buttons { display: flex; justify-content: space-between; margin-top: 20px; }
+.action-buttons { display: flex; flex-direction: column; gap: 10px; }
+
+/* Progress Bar */
+.progress-container {
+    width: 100%;
+    background: #e2e8f0;
+    border-radius: 10px;
+    height: 8px;
+    margin-bottom: 10px;
+}
+.progress-bar {
+    height: 100%;
+    background: var(--primary-color);
+    border-radius: 10px;
+    width: 0%;
+    transition: width 0.4s ease;
+}
+.progress-text { font-size: 13px; color: var(--text-muted); margin-bottom: 20px; text-align: center; }
+
+/* Opsi Jawaban (Custom Radio) */
+.question-title { font-size: 18px; margin-bottom: 20px; text-align: center; color: var(--text-main); }
+.option-label {
+    display: block;
+    padding: 15px;
+    margin-bottom: 10px;
+    background: #f8fafc;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: left;
+    font-weight: 500;
+}
+.option-label:hover { background: #e2e8f0; }
+.option-label.selected {
+    background: #eff6ff;
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+input[type="radio"] { display: none; }
+
+/* Tampilan Hasil */
+.score-circle {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    font-weight: bold;
+    margin: 20px auto;
+}
+.explanation-box, .advice-box {
+    background: #f8fafc;
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 15px;
+    text-align: left;
+}
+.advice-box ul { padding-left: 20px; margin-top: 10px; }
+.advice-box li { margin-bottom: 8px; }
+.disclaimer-alert { font-size: 12px; color: #d97706; background: #fef3c7; padding: 10px; border-radius: 8px; margin-top: 20px; }
+
+/* Refleksi Harian (Emoji) */
+.emoji-container { display: flex; justify-content: space-around; margin-top: 15px; }
+.emoji-btn {
+    font-size: 30px;
+    cursor: pointer;
+    text-align: center;
+    transition: transform 0.2s;
+    padding: 10px;
+    border-radius: 10px;
+}
+.emoji-btn:hover { transform: scale(1.1); background: #f1f5f9; }
+.emoji-btn.active { background: #e2e8f0; transform: scale(1.1); }
+
+/* Tips Grid */
+.tips-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-top: 20px;
+}
+.tip-card {
+    background: #f8fafc;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    border: 1px solid #e2e8f0;
+}
+.tip-icon { font-size: 30px; margin-bottom: 10px; }
+.tip-card h4 { font-size: 15px; margin-bottom: 5px; color: var(--primary-color); }
+.tip-card p { font-size: 12px; }
+
+/* Responsive untuk HP */
+@media (max-width: 480px) {
+    .tips-grid { grid-template-columns: 1fr; }
+    .card { padding: 20px; }
+}
+
+/* Mode Cetak */
+@media print {
+    body { background: white; }
+    .card { box-shadow: none; padding: 0; }
+    .no-print { display: none !important; }
+}
